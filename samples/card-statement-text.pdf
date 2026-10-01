@@ -1,0 +1,57 @@
+%PDF-1.4
+%‚„œ”
+1 0 obj
+<< /Type /Catalog /Pages 2 0 R >>
+endobj
+2 0 obj
+<< /Type /Pages /Kids [3 0 R] /Count 1 >>
+endobj
+3 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Contents 4 0 R /Resources << /Font << /F1 5 0 R >> >> >>
+endobj
+4 0 obj
+<< /Length 1073 >>
+stream
+BT
+/F1 10 Tf
+1 0 0 1 50 760 Tm (EXAMPLE BANK VISA SIGNATURE - FAKE SAMPLE STATEMENT) Tj
+1 0 0 1 50 744 Tm (Account Number: XXXX XXXX XXXX 4242) Tj
+1 0 0 1 50 728 Tm (Statement Period 12/05/2023 - 01/04/2024) Tj
+1 0 0 1 50 712 Tm (New Balance $1,482.37     Minimum Payment Due $40.00) Tj
+1 0 0 1 50 696 Tm (Purchase Annual Percentage Rate \(APR\) 22.74%) Tj
+1 0 0 1 50 680 Tm (Payments and Credits) Tj
+1 0 0 1 50 664 Tm (12/20 PAYMENT THANK YOU) Tj
+1 0 0 1 450 664 Tm (500.00) Tj
+1 0 0 1 50 648 Tm (12/28 RETURN: TARGET 00012345) Tj
+1 0 0 1 450 648 Tm (25.00) Tj
+1 0 0 1 50 632 Tm (Purchases) Tj
+1 0 0 1 50 616 Tm (12/06 12/07 KROGER #512 COLUMBUS OH) Tj
+1 0 0 1 450 616 Tm (83.19) Tj
+1 0 0 1 50 600 Tm (12/11 12/12 SHELL OIL 12345678) Tj
+1 0 0 1 450 600 Tm (41.02) Tj
+1 0 0 1 50 584 Tm (12/15 12/16 <script>alert\("pdf"\)</script>) Tj
+1 0 0 1 450 584 Tm (9.99) Tj
+1 0 0 1 50 568 Tm (12/24 12/26 AMAZON.COM*AB12CD) Tj
+1 0 0 1 450 568 Tm (126.45) Tj
+1 0 0 1 50 552 Tm (01/02 01/03 NETFLIX.COM) Tj
+1 0 0 1 450 552 Tm (15.49) Tj
+1 0 0 1 50 536 Tm (Total purchases 276.14) Tj
+ET
+endstream
+endobj
+5 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>
+endobj
+xref
+0 6
+0000000000 65535 f 
+0000000015 00000 n 
+0000000064 00000 n 
+0000000121 00000 n 
+0000000247 00000 n 
+0000001372 00000 n 
+trailer
+<< /Size 6 /Root 1 0 R >>
+startxref
+1442
+%%EOF

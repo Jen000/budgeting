@@ -1,0 +1,32 @@
+/* Print / "Save as PDF": only the report is printed. */
+
+@page { margin: 14mm 12mm; }
+
+:root {
+  color-scheme: light;
+  --bg: #fff; --surface: #fff; --surface-2: #f4f4f2; --border: #bbb; --grid: #ddd;
+  --text: #000; --text-2: #333; --muted: #444;
+  --series-income: #2a78d6; --series-spend: #eb6834;
+  --good: #1d6b2e; --good-bg: #fff; --danger: #a32222; --danger-bg: #fff; --warn: #7a4d00; --warn-bg: #fff;
+}
+
+body { background: #fff; color: #000; font-size: 11pt; }
+
+/* Hide navigation, banners, upload controls, buttons and every other step. */
+.no-print, .site-header, .site-footer, .privacy-banner, .steps, .skip-link, .status-line,
+[data-step-panel]:not(#step-export), .export-controls, button, input, select, .pager, .next-row {
+  display: none !important;
+}
+#step-export { display: block !important; border: 0; padding: 0; margin: 0; }
+main { max-width: none; padding: 0; }
+.report { border: 0; padding: 0; }
+
+* { print-color-adjust: exact; -webkit-print-color-adjust: exact; }
+.report-section { break-inside: auto; }
+.report-section h3 { break-after: avoid; }
+.chart-figure, .tiles, tr { break-inside: avoid; }
+.table-wrap { overflow: visible; }
+table.data { font-size: 9.5pt; }
+.chart { max-width: 160mm; }
+.tile { border: 1px solid #bbb; }
+.flag { border-left-width: 3px; }

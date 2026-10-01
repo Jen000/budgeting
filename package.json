@@ -1,0 +1,11 @@
+{
+  "name": "private-budget",
+  "private": true,
+  "description": "Dev-only metadata. The app has no npm dependencies; this file only tells Node to treat site/js/*.js as ES modules for the unit tests.",
+  "type": "module",
+  "scripts": {
+    "test": "node --test tests/",
+    "serve": "node tools/serve.mjs",
+    "verify-pdfjs": "sh tools/verify-pdfjs.sh"
+  }
+}

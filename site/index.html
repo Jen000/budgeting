@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- Fallback copy of the CSP that _headers sends. frame-ancestors is omitted here because
+     browsers ignore it in <meta>; the HTTP header (and X-Frame-Options) enforce it. -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self'; img-src 'self' data: blob:; font-src 'self'; connect-src 'none'; worker-src 'self'; form-action 'none'; base-uri 'none'; object-src 'none'; require-trusted-types-for 'script'; trusted-types 'none'">
+<meta name="referrer" content="no-referrer">
+<meta name="color-scheme" content="light dark">
+<meta name="description" content="A private, offline budgeting tool. Your files never leave your device.">
+<title>Private Budget</title>
+<!-- Empty data: icon so the browser never requests /favicon.ico -->
+<link rel="icon" href="data:,">
+<link rel="stylesheet" href="css/app.css">
+<link rel="stylesheet" href="css/print.css" media="print">
+<!-- PDF.js 6.3.289, self-hosted and pinned. See vendor/pdfjs-6.3.289/VERSION.md.
+     The worker module loads first so PDF.js parses in-page and never fetches anything later. -->
+<script type="module" src="vendor/pdfjs-6.3.289/pdf.worker.mjs" integrity="sha384-AzcYX25yPL+RXO1exGVxYnTOllKYsHH8WoZX+n+Z+Cekli52UJoV4i8f2nC9LwEL"></script>
+<script type="module" src="vendor/pdfjs-6.3.289/pdf.mjs" integrity="sha384-9nEaZvLkvNW0evMnMGhOHMJt/7q6Dem5SsU2KJQO6BZvWUXB8An9DULmwLKxwsaw"></script>
+<script type="module" src="js/main.js"></script>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="site-header no-print">
+  <div class="brand">
+    <h1>Private Budget</h1>
+    <p class="tagline">Understand your money without handing it to anyone.</p>
+  </div>
+  <button type="button" id="clear-all" class="btn btn-danger">Clear all data</button>
+</header>
+
+<div class="privacy-banner no-print" role="note" aria-label="Privacy">
+  <p><strong>Your files never leave your device. Nothing is saved. Refreshing this page erases everything.</strong></p>
+  <p class="privacy-sub">Everything runs inside this tab. There is no server, no account and no tracking. To keep your results, use Export → Save as PDF.</p>
+</div>
+
+<nav class="steps no-print" aria-label="Steps">
+  <ol>
+    <li><button type="button" data-step="upload">1. Upload</button></li>
+    <li><button type="button" data-step="review">2. Review &amp; categorize</button></li>
+    <li><button type="button" data-step="insights">3. Insights</button></li>
+    <li><button type="button" data-step="budget">4. Budget &amp; debts</button></li>
+    <li><button type="button" data-step="goals">5. Goals</button></li>
+    <li><button type="button" data-step="export">6. Export</button></li>
+  </ol>
+</nav>
+
+<main id="main" tabindex="-1">
+  <div id="status" class="status-line no-print" role="status" aria-live="polite"></div>
+
+  <noscript><p class="notice notice-critical">This app needs JavaScript. It runs entirely in your browser and makes no network requests.</p></noscript>
+
+  <section id="step-upload" class="step" data-step-panel="upload" aria-labelledby="h-upload">
+    <h2 id="h-upload" tabindex="-1">1. Upload your statements</h2>
+    <p>Add bank statements, credit-card statements and loan statements. You can add several files, including ones whose dates overlap; duplicates are removed automatically.</p>
+    <p class="notice notice-info"><strong>Most accurate:</strong> CSV or OFX/QFX exports from your bank's website. Text-based PDF statements also work, but PDF reading is imperfect, so you will review every row before it is used. Scanned or photographed documents are not supported.</p>
+
+    <div id="drop-zone" class="drop-zone">
+      <label for="file-input" class="drop-label">
+        <span class="drop-title">Choose files</span>
+        <span class="drop-sub">or drag and drop them here · CSV, OFX, QFX or PDF · up to 20&nbsp;MB each</span>
+      </label>
+      <input type="file" id="file-input" multiple accept=".csv,.txt,.ofx,.qfx,.pdf,text/csv,application/pdf,application/x-ofx">
+    </div>
+    <div id="upload-errors" class="errors" role="alert"></div>
+
+    <div id="mapping-panel"></div>
+    <div id="pdf-review-panel"></div>
+    <div id="files-panel"></div>
+
+    <h3 id="h-pay">Paychecks</h3>
+    <p>Enter your pay to get an accurate income figure. Deposits found in your statements are used if you skip this. You can also upload a text-based PDF paystub to pre-fill this form; you always confirm the numbers.</p>
+    <div id="paystub-panel"></div>
+    <div id="paycheck-form-panel"></div>
+    <div id="paychecks-panel"></div>
+  </section>
+
+  <section id="step-review" class="step" data-step-panel="review" aria-labelledby="h-review" hidden>
+    <h2 id="h-review" tabindex="-1">2. Review &amp; categorize</h2>
+    <p>Check categories and choose what counts. Transfers between your own accounts and credit-card payments are excluded from spending, so nothing is counted twice.</p>
+    <div id="review-panel"></div>
+    <h3>Your categorization rules</h3>
+    <p>Rules match text in the description. Your rules always win over the built-in ones.</p>
+    <div id="rules-panel"></div>
+  </section>
+
+  <section id="step-insights" class="step" data-step-panel="insights" aria-labelledby="h-insights" hidden>
+    <h2 id="h-insights" tabindex="-1">3. Insights</h2>
+    <div id="insights-panel"></div>
+  </section>
+
+  <section id="step-budget" class="step" data-step-panel="budget" aria-labelledby="h-budget" hidden>
+    <h2 id="h-budget" tabindex="-1">4. Budget &amp; debts</h2>
+    <div id="budget-panel"></div>
+    <h3 id="h-debts">Debts &amp; payoff plan</h3>
+    <div id="debts-panel"></div>
+  </section>
+
+  <section id="step-goals" class="step" data-step-panel="goals" aria-labelledby="h-goals" hidden>
+    <h2 id="h-goals" tabindex="-1">5. Savings goals</h2>
+    <div id="goals-panel"></div>
+  </section>
+
+  <section id="step-export" class="step" data-step-panel="export" aria-labelledby="h-export" hidden>
+    <h2 id="h-export" tabindex="-1" class="no-print">6. Export a report</h2>
+    <div class="export-controls no-print">
+      <p>Use your browser's print dialog and choose <strong>Save as PDF</strong> as the destination. The saved PDF is a normal file on your device: it is outside this page's protection, so store it somewhere safe.</p>
+      <div class="field-row">
+        <input type="checkbox" id="mask-accounts" checked>
+        <label for="mask-accounts">Mask account and card numbers (show only the last 4 digits)</label>
+      </div>
+      <button type="button" id="print-report" class="btn btn-primary">Print / Save as PDF</button>
+      <p class="hint">Preview of the report:</p>
+    </div>
+    <div id="report" class="report"></div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <p class="disclaimer"><strong>Not financial advice.</strong> This tool gives general information based on the files you provide. It can make mistakes, especially with PDF statements. Check important numbers, and consider a qualified professional for decisions about debt, taxes or investments.</p>
+  <p class="no-print">Works offline once loaded. Makes no network requests and stores nothing.</p>
+</footer>
+</body>
+</html>
